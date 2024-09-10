@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Liste des Tickets</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de création</th>
+                <th>Auteur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.titre }}</td>
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.date_creation }}</td>
+                    <td>{{ ticket.auteur.username }}</td>
+                    <td>
+                        <a href="{% url 'modifier_ticket' ticket.id %}" class="btn btn-warning">Modifier</a>
+                        <a href="{% url 'supprimer_ticket' ticket.id %}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'creation_ticket' %}" class="btn btn-primary">Créer un nouveau ticket</a>
+</div>
+{% endblock %}
